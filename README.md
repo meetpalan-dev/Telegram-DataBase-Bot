@@ -1,23 +1,43 @@
 # Telegram Database Bot System
 
-A multi-bot Telegram file storage system that uses a Telegram channel as a database, managed by a supervisor service and monitored through a web dashboard.
+A searchable file storage system built on top of Telegram.
 
-This project explores how a messaging platform can act as a backend storage layer while maintaining reliability through monitoring, restart logic, and backup services.
+This project turns a Telegram channel into a structured file database.  
+Files are indexed, searchable by keywords, and automatically retrieved through coordinated worker bots monitored by a supervisor service and a web dashboard.
+
+Instead of storing files on a traditional server, Telegram acts as the storage layer while Python services provide querying, indexing, and reliability control.
 
 ---
 
 ## Overview
 
-The system consists of multiple independent worker bots coordinated by a supervisor:
+The system continuously scans a Telegram channel and builds a searchable index using file names and captions.
 
-- Index Bot → scans a Telegram channel and builds a searchable file index
-- Forwarder Bot → sends requested files to users
-- Clean Bot → manages and cleans forwarded messages
-- Supervisor → monitors bots and restarts them on failure
-- Dashboard → displays runtime status
-- Backup Service → periodically stores index data
+Users can request files by typing keywords — not exact filenames — and the bot retrieves matching messages automatically. Results are paginated and delivered in batches similar to search results.
 
-Telegram acts as the storage medium while Python services act as the control layer.
+Multiple independent services work together:
+
+- Index Bot → scans channel and builds searchable metadata
+- Forwarder Bot → retrieves matching files
+- Clean Bot → manages forwarded messages
+- Supervisor → monitors bots and restarts on failure
+- Dashboard → shows runtime health status
+- Backup Service → preserves index data
+
+This effectively transforms Telegram into a lightweight searchable storage backend.
+
+---
+
+## Features
+
+- Keyword-based search (no exact filename required)
+- Caption and filename indexing
+- Automatic file retrieval from channel database
+- Batched results with "see more" pagination
+- Multi-process bot architecture
+- Automatic crash recovery
+- Health monitoring dashboard
+- Backup management system
 
 ---
 
