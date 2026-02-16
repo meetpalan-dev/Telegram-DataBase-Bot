@@ -26,18 +26,20 @@ Multiple independent services work together:
 
 This effectively transforms Telegram into a lightweight searchable storage backend.
 
+A lightweight web dashboard also exposes a health-check interface to verify whether the service is running.
+
 ---
 
 ## Features
 
 - Keyword-based search (no exact filename required)
 - Caption and filename indexing
-- Automatic file retrieval from channel database
+- Automatic file retrieval from Telegram channel database
 - Batched results with "see more" pagination
 - Multi-process bot architecture
-- Automatic crash recovery
-- Health monitoring dashboard
-- Backup management system
+- Web health-check dashboard (server uptime monitoring)
+- Automatic restart supervision
+- Backup and indexing persistence
 
 ---
 
@@ -95,6 +97,18 @@ python -m supervisor.main
 
 ---
 
+## Project Status
+
+The core system — indexing, keyword search, and file retrieval — is fully functional.
+
+Additional operational components such as advanced monitoring and automation services are optional enhancements and still being refined.  
+They improve observability and reliability but are not required for the main functionality of the system.
+
+The project is actively evolving with a focus on improving stability and operational tooling.
+
+---
+
 ## Note
 
 This project is created for educational and experimental purposes to explore system design, service orchestration, and unconventional storage approaches using messaging platforms.
+
